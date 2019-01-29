@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app:
+    build: .
+    hostname: kixeye
+    volumes:
+            -  /tmp/:/var/log/
+    ports:
+     - "8080:8080"
+    links:
+      - "db:redis.local"
+  db:
+    image: "redis"
+    volumes:
+            - ./redis.conf:/usr/local/etc/redis/redis.conf
+    hostname: redis.local
+    ports:
+     - "6379:6379"
+
